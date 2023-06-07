@@ -1,8 +1,9 @@
 # myex
 강의자료, 책 등에서의 실습예제 나만의 방식으로 해본 것들
 
+
 # GradeManagementSystem(학점관리시스템)
-- 책<Do it! 자바 프로그래밍 입문>의 최종 프로젝트 실습
+- 책 <Do it! 자바 프로그래밍 입문>의 최종 프로젝트 실습
 - 데이터와 목표만 가지고 직접 설계 및 구현한 프로그램(책의 코드와 다름)
 - Student 클래스 : 학생에 관한 클래스
   - 필드: 이름, 학번, 전공, 평균 점수, 최종 학점, 수강 과목(해시맵)
@@ -51,3 +52,58 @@
   - 전공 리포트 생성
 - FinalStaticNumber 클래스 : 상수 영역(만들어놓고 사용할 일이 없어서 비워져있음)
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223117795740)
+
+
+# ChatProgram(TCP 소켓 프로그래밍을 이용한 채팅 프로그램)
+- 책 <이것이 자바다>의 Chapter 19 Section 7의 채팅 프로그램 실습
+- 설계의 틀은 책에서 가져왔으나 만들면서 내 방식대로 변형시켜본 것
+- ChatServer 클래스 : 채팅프로그램의 유저(클라이언트)의 연결 요청을 승인하며 채팅방을 관리하는 클래스
+  - 필드 : 서버 소켓, 스레드풀(SocketClient에서 사용), 유저(클라이언트)와 연결된 소켓을 관리하기 위한 동기화된 맵인 chatRoom(채팅방)
+  - 메서드
+    - start(int portNo) : 포트번호를 매개값으로 받아 이 포트로 서버 열기
+    - run() : 유저와 연결을 승인(accept())하고 반환된 소켓을 SocketClient를 생성하여 매개값으로 넘김. SocketClient의 receive() 함수를 호출하여 유저의 요청에 따라 입장, 메세지 전송, 퇴장이 이루어질 수 있도록 함. 스레드를 별도로 생성하였기 때문에 서버 소켓이 닫히면 에러가 발생하므로 프로세스가 종료되도록 예외처리함. 데몬스레드로 설정하여 메인 스레드가 종료하면 해당 스레드도 종료되도록 함.
+    - stop() : 서버 소켓을 닫고 스레드풀을 정리함. chatRoom에 있는 SocketClient의 소켓도 모두 닫도록 함.
+    - addToChatRoom(SocketClient clientSoc) : 채팅방에 유저가 입장되도록 함(서버가 관리하는 목록에 추가)
+    - removeFromChatRoom(SocketClient clientSoc) : 채팅방에 유저가 퇴장하도록 함(서버가 관리하는 목록에서 삭제)
+    - private String notice(String status, String userInfo) : 유저가 채팅방에 입장 또는 퇴장시 알림으로 사용할 문자열 생성
+    - sendToAll(SocketClient sender, String receivedMessage) : 유저가 요청 사항을 보내면 해당 내용이 발신자를 제외한 채팅방의 모든 유저에게 일괄 전송되도록 함(chatRoom으로 관리하는, 유저와 연결된 모든 소켓에서 데이터를 보내는 방식).
+    - String mkMessage(String key, String receivedMessage) : 유저에게 메세지를 보낼때 형식을 JSON으로 바꿔주는 메서드
+  - 스레드 : 메인 스레드와 채팅방에 딜레이 적게 유저를 받을 수 있도록 하기 위해 run() 부분 분리
+  - 메인 메서드(실행)
+    - 55555번 포트로 서버 오픈.
+    - 유저의 연결 요청을 받는 스레드 따로 생성.
+    - Scanner를 받아서 서버가 바로 종료되지 않도록 콘솔창에 stop을 입력받을 때까지 stop() 메서드 블로킹시킴
+- SocketClient 클래스 : 서버가 채팅 유저와 연결된 소켓을 관리하기 위해 만든 클래스(서버에서 동기화된 맵으로 관리함), ChatServer의 내부 인스턴스 클래스로 만들어도 될 듯하나 너무 길어져서 분리한 듯 main() 메서드는 없는데 이는 채팅 서버의 run()에서 생성하고 모든 프로세스가 돌아가게 하는 receive()가 호출되었기 때문.
+  - 필드 : 서버 소켓, 유저와 연결된 소켓, 유저의 key(채팅명@클라이언트 IP 또는 HostName), DataInputStream, DataOutputStream, 클라이언트의 주소 정보(IP 또는 HostName), 조용히 퇴장 여부
+  - 생성자 : 서버 소켓과 유저와 연결된 매개값을 받아 내부 멤버변수에 넣어줌. 입출력스트림을 유저와 연결된 소켓과 연결.
+  - 메서드
+    - send() : 소켓에 연결된 유저에게 매개값으로 입력된 메세지 전송(출력 스트림 사용)
+    - receive()
+      - 입력 스트림으로 유저에게 요청 메세지를 받아 JSONObject로 메세지 파싱.
+        - 메세지(msg) : 키 request의 값이 msg이면 키 data로 온 메세지 msg 내용을 전송
+        - 입장(entry) : 키 request의 값이 entry이면 유저의 key(채팅명@IP 또는 HostName)를 설정하고 채팅방에 입장하도록 함. 입장한 유저를 제외한 모든 방에 입장했다는 메세지 전송.
+        - 조용히 퇴장(quietExit) : 키 request의 값이 quietExit이면 조용히 퇴장 여부를 data값(true)으로 변경. (퇴장은 후에 유저가 소켓을 닫으면 예외로 넘어가서 처리됨)
+        - 예외(퇴장) : 채팅방에서 유저를 제외하고 유저와 연결된 소켓을 닫음. 조용히 퇴장 여부가 false일 경우만 모든 방에 퇴장 메세지가 전송됨(true면 전송되지 않음)
+    - close() : 서버의 chatRoom에서 해당 소켓을 제거(=채팅방 퇴장)하고 유저와 연결된 소켓을 닫음.
+    - 기타 getter/setter : String getKey(), String getAddrInfo(), setKey(String chatName), setAddrInfo(String hostString), setQuietExit(boolean quietExit)
+  - 스레드 : 유저의 요청을 처리하기 위해 스레드풀 사용. 유저들의 입장/퇴장과 메세지 전송에 따라 동시다발적으로 많은 요청이 있을 수 있기 때문에 스레드풀로 스레드 생성.
+- ChatUser 클래스 : 유저용 소켓을 생성하고 서버 및 다른 사용자와 소통할 수 있는 클래스(클래스 이름을 책에 있는 ChatClient로 하면 헷갈려서 ChatUser로 변경함)
+  - 필드 : 서버와 연결된 소켓, 데이터 입출력 스트림, 채팅명
+  - 메서드
+    - connect(String addr, int portNo) : 연결할 서버의 IP 주소와 포트번호를 매개값으로 받아 해당 서버로 연결함. 입출력 스트림을 서버와 연결된 소켓에 연결함.
+    - unconnect() : 서버와 연결된 소켓을 닫음. (서버에서 퇴장 처리됨)
+    - setChatName(String chatName) : 채팅명을 설정함.
+    - send(String message) : 서버와 통신하기 위한 메서드로 서버에 요청내용을 매개변수로 받아 "전송"하는 역할.(전송만 함)
+      - String mkRequest(String request, String data) : 서버에 요청할 메세지 내용을 JSON 형태로 생성(매개값으로 넘길 문자열)
+      - enterChatRoom() : 서버에 채팅방에 입장하겠다는 요청 전송
+      - exitChatRoom(boolean quietExit) : 매개값으로 조용히 퇴장 여부를 받아 true일 경우 서버에 조용히 퇴장 여부의 값을 전송함. (서버와 연결은 끊지 않고 이 메서드 호출 후 unconnect() 메서드로 연결 해제. 다만 채팅방에 퇴장 알림은 조용히 퇴장 여부에 따라서 띄움)
+      - sendMessage(String message) : 채팅방에 메시지를 전송하는 메서드
+    - receive() : 서버로부터 메세지를 받아서 파싱하고 유저에게 띄우는 메서드. 메세지 전송과 수신을 동시에 하기 위해 스레드를 생성. 메인 메서드가 종료되면 함께 종료되도록 데몬 스레드로 설정. 서버와 연결을 끊겨 예외가 발생했을 경우 프로세스를 종료시킴.
+  - 스레드 : 서버로부터 데이터를 수신하는 메서드를 메세지 발신과 동시에 실행될 수 있도록 receive() 메서드에 스레드를 생성하여 분리하였음.
+  - 메인 메서드(실행)
+    - 포트번호 55555로 "localhost"에 열린 서버와 연결.
+    - Scanner을 생성하여 유저가 대화명을 입력하도록 하여 chatName에 저장한 후 채팅방 입장.
+    - receive()를 호출(스레드가 별도로 생성됨)
+    - 유저로부터 (콘솔창에서) 메세지를 입력받아서 메세지 전송.
+    - exit만 입력했을 경우 채팅모드를 종료하고 조용히 퇴장 여부 확인. y 입력시 조용히 퇴장, n 입력시 일반 퇴장, 기타 다른 것들을 입력했을 경우 퇴장을 취소하고 채팅모드로 돌아감.
+    - 퇴장을 선택하였을 경우 Scanner를 닫고 서버와 연결을 끊음.
