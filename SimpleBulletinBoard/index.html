@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>공지사항 작성하기</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script defer src="js/script.js"></script>
+</head>
+<body>
+	<div id="container">
+		<form name="noticePost">
+			<fieldset>
+				<legend>공지사항 작성하기</legend>
+				<ul>
+					<li>
+						<label for="title">제목</label>
+						<input type="text" name="title" id="title" placeholder="제목을 입력하시오." required onclick="this.value = '공지사항';">
+					</li>
+					<li>
+						<label for="author">작성자</label>
+						<input type="text" name="author" id="author" placeholder="작성자를 입력하시오." required onclick="this.value = '관리자';">
+					</li>
+					<li>
+						<label for="content">내용</label>
+						<textarea name="content" id="content" cols="30" rows="10" placeholder="내용을 입력하시오." required></textarea>
+					</li>
+					<li>
+						<label for="uploadFile">첨부파일</label>
+						<input type="file" name="uploadFile" id="uploadFile" accept=".png, .jpg" multiple>
+					</li>
+				</ul>
+				<!-- <button type="submit">작성하기</button> -->
+				<div id="btnSet">
+					<button type="button" name="submitBtn" id="submitBtn">작성하기</button>
+					<button type="reset" name="resetBtn" id="resetBtn">삭제하기</button>
+				</div>
+			</fieldset>
+		</form>
+
+		<hr>
+
+		<div id="test">
+			<table border="1">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th colspan="2">제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+
+				<tbody id="boardContent">
+				</tbody>
+
+				<tfoot>
+					<tr>
+						<th colspan="5">전체 게시글 수</th>
+						<th id="postCount"></th>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+
+		<div id="postBackground">
+			<div id="postContainer">
+				<h2 id="postTitle">제목</h2>
+				<p id="postAuthor">작성자</p>
+				<p id="postContent">내용</p>
+				<p id="postFileName">첨부파일명</p>
+				<div id="postBtns">
+					<!-- <button id="postEditBtn">수정하기</button> -->
+					<button id="postBackBtn">뒤로가기</button>
+					<button id="postDeleteBtn">삭제하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
