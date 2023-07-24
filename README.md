@@ -317,9 +317,26 @@
     - public boolean borrowBooks(Member mem, int...bookNoes) : 멤버와 빌리려는 책들의 번호를 매개값으로 받아 rentBook() 메서드로 대출가능 여부를 확인하여 대출 가능한 책 목록을 전달받은 후 null값이면(대출 불가능한 사유가 있으면) 대출 실패라는 의미의 false를 반환. 대출 가능한 책 목록에 책이 있으면 멤버의 대출 목록에 해당 도서들을 추가하고 true를 반환함.(+쿠폰 발급 여부와 개수를 확인해서 로그인 중인 멤버의 쿠폰 개수를 증가시켜주는 작업도 추가해야 함)
     - public int issueCoupon(int...bookNoes) : 책 번호 목록을 받아 쿠폰을 발큽해주는 책이 있으면 개수를 모두 세서 발급하려는 쿠폰 개수를 반환함.
     - public boolean checkAccessAge(Member mem, int...bookNoes) : 멤버와 책 번호 목록을 받아서 만약 해당 책이 만화책일 경우 연령제한이 있는지, 있으면 멤버가 볼 수 있는 연령인지 확인. 대출 가능하면 true, 아니면 false 반환.
-    - public boolean returnBooks(Member mem, int...bookNoes) : 멤버와 반납하려는 책 번호들을 받아서 
+    - public boolean returnBooks(Member mem, int...bookNoes) : 멤버와 반납하려는 책 번호들을 받아서 대여한 책 목록에 있는지 확인. 없는 번호면 반납에 실패했다는 의미의 false 반환. 있으면 해당 책의 대출 가능 여부를 true로 바꿔주고 멤버의 대출 도서 목록에서 해당 책을 제거한 후 반납에 성공했다는 의미의 true 반환.
 - view
-  - LibraryMenu : 
-- run
-  - Run : 
+  - LibraryMenu : 사용자에게 메뉴를 출력하기 위해 사용자가 원하는 작업과 매핑해서 작업 순서를 컨트롤할 수 있게 하는 클래스
+  - 도서관을 컨트롤하는 LibraryController와 사용자에게 입력을 받기 위한 Scanner, 현재 로그인 중인 멤버를 필드로 선언함. 현재 로그인 중인 멤버의 초기값은 null.
+  - public void insertBook(매개변수들) : 오버로딩하여 매개값에 따라 생성되는 책 클래스가 달라짐. 제목, 저자, 출판사만 입력하면 Book, 제한연령도 입력하면 AniBook, 쿠폰발급유무도 입력하면 CookBook이 생성됨. (점점 갈수록 좀 더 다양하고 많은 책을 소장하게 된다고 가정하면 type값을 받아 매핑해주는 것이 더 좋을 것 같음)
+  - private int inputCastInt() : 콘솔창에서 입력받아 int형으로 변환해서 반환
+  - private String showNInput(String cont) : 매개값으로 받은 값을 콘솔창에 띄워 해당하는 값을 입력받아 반환함
+  - private String makeMenuOutline(String...cont) : 메뉴의 전반적인 틀을 생성해서 문자열로 반환해주는 메서드. 매개값으로 입력하는 변수에 따라 각각 메뉴 번호와 함께 메뉴로 구성함.
+  - public void selectSignInUpMenu() : 처음 도서관 프로그램 실행시 뜨는 로그인/회원가입 메뉴. 사용자의 입력값에 따라 해당하는 메뉴로 매핑시켜줌.
+  - private void signInMenu() : 회원번호를 입력받아 없으면 없다고 하고 다시 값을 입력받음. 있으면 현재 사용자에 회원번호에 해당하는 멤버를 대입하고 로그인 성공 메시지를 띄운 후 메인메뉴로 이동. 잘못 입력하여 예외가 발생했을 경우 잘못 입력했다는 메시지를 출력하고 다시 회원번호 값을 입력받음.
+  - private void signUpMenu() : 회원가입을 위한 메서드. 사용자에게 정보를 입력받아 멤버를 생성하여 회원 목록에 추가해줌. 회원가입에 성공하면 성공했다는 메시지와 함께 회원번호를 출력하고 메인 메뉴로 이동. 유효하지 않는 값을 입력하면 예외처리하여 잘못 입력했다는 메시지를 출력하고 다시 값을 받음.
+  - private void mainMenu() : 로그인 후 메뉴 출력. 사용자에게 입력받아 해당하는 메뉴로 매핑시켜줌.
+  - private void showMyPage() : 현재 로그인 중인 사용자 정보 출력. 이후 뒤로가기/종료하기 메뉴 출력.
+  - private void selectAll() : 현재 소장중인 책 개수와 함께 소장도서목록 출력. 이후 뒤로가기/종료하기 메뉴 출력.
+  - private void searchBook() : 검색 키워드를 입력받아 소장도서에서 키워드 포함하는지 조회. 없으면 검색 결과가 없다고 출력하고 있으면 해당하는 책 목록을 받아 출력해줌. 이후 뒤로가기/종료하기 메뉴 출력.
+  - private void rentBook() : 도서를 대출하기 위한 메서드. 대출하려는 책 권수를 입력받아 개수가 대출중인 책을 포함하여 인당 제한 개수를 초과하진 않는지 확인. 아니면 반납하려는 책 번호를 입력받아 배열로 만든 후 LibraryController의 borrowBooks() 메서드에 현재 사용자와 함께 넘김. 결과에 따라 성공하면 완료했다는 메시지 출력. 요리쿠폰이 발급되면 쿠폰이 발급되었다는 메시지도 출력. 대출 실패시 해당하는 상황에 따라 메시지 출력. 이후 뒤로가기/종료하기 메뉴 출력
+  - private void returnBooks() : 대출 중인 도서를 반납하기 위한 메서드. 사용자가 대출중인 책이 없으면 이를 알리고 뒤로가기/종료하기 메뉴 출력. 반납 가능한 책이 있으면 반납할 책의 개수와 책 번호를 입력받아 반납하려는 책 목록에 추가함. LibraryController의 도서 반납 메서드(returnBooks())를 호출하여 성공하면 완료했다는 메시지를, 실패하면 실패했다는 메시지를 출력. 이후 뒤로가기/종료하기 메뉴 출력
+  - private void backOrExitMenu() : 뒤로가거나 종료하는 메뉴를 띄우고 사용자의 입력값에 따라 해당하는 기능을 수행하는 메서드.
+  - private void logOut() : 현재 로그인한 사용자를 null로 비우고 맨 처음의 로그인 메뉴로 이동시킴
+  - private void exit() : 프로세스를 종료하는 메서드
+- run : Run(프로그램 실행 진입점)
+  - Run : LibraryMenu를 생성. 도서 목록을 추가한 후 메뉴 실행시킴(시작점은 로그인 또는 회원가입 메뉴)(+)도서 목록을 추가하는 작업은 관리자 계정을 만들어 해당 계정에만 도서 목록 추가 등의 작업을 할수 있게 만들면 될듯)
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
