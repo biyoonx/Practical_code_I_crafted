@@ -296,10 +296,28 @@
   - Book : 도서관에 소장중인 책에 대한 정보가 저장되는 형태를 정의한 클래스
     - 책 번호(자동생성됨), 책 제목, 저자, 출판사, 대출가능여부(생성시 기본값 true)로 구성됨.
     - 기타 필요한 생성자, Getter, Setter, toString 등은 Lombok으로 정의함
-  - AniBook : Book을 
-  - CookBook : 
+  - AniBook : Book을 상속하는 만화책 클래스.
+    - 추가로 제한연령에 관한 필드가 있음.
+    - toString()에서 타입(AniBook)과 제한연령(AccessAge)에 관한 정보도 추가로 출력함.
+    - 기타 필요한 생성자, Getter, Setter, toString 등은 Lombok으로 정의함
+  - CookBook : Book을 상속하는 요리책 클래스.
+    - 추가로 요리학원 쿠폰 발급 유무에 대한 정보가 있는 필드가 있음.
+    - toString()에서 타입(CookBook)과 쿠폰발급유무에 대한 정보가 추가로 출력됨.
+    - 기타 필요한 생성자, Getter, Setter, toString 등은 Lombok으로 정의함
 - controller
-  - LibraryController : 
+  - LibraryController : 도서관 시스템의 기능에 관해 컨트롤하는 클래스
+    - 도서관 회원을 담은 Map과 소장도서를 담은 Map을 필드로 가지고 있음
+    - public void insertMember(Member mem) : 회원이 가입했을 때 멤버 목록에 추가하기 위한 메서드. 매개값으로 Member타입 변수를 받아 회원 Map에 멤버를 추가함. 가입된 회원이 없을 때는 일단 Map을 먼저 생성하고 추가함.
+    - public Member memInfo(int memNo) : 멤버의 회원번호를 매개값으로 받아 해당하는 멤버를 반환해줌. 마이페이지에 정보를 출력하기 위한 메서드로 멤버를 Member 타입으로 반환해줌.
+    - public void insertBook(Book book) : 소장 도서를 추가하기 위한 메서드. Book 타입의 변수를 매개값으로 받아 소장도서 Map에 도서를 추가함. 만약 소장도서가 없으면 먼저 Map을 생성한 후에 추가함.
+    - public Map<Integer, Book> selectAll() : 소장도서 전체를 Map 타입으로 반환하는 메서드.
+    - public Map<Integer, Book> searchBook(String keyword) : 검색하려는 키워드를 매개값으로 받아 소장도서에 키워드가 있는지 검색하는 메서드. 책 제목이나 저자나 출판사에 키워드가 있으면 값을 Map에 담아 반환함(List 형태로 반환해도 괜찮을 것 같음. stream을 사용해서 Map으로 만드는 방식을 저장해두려고 바꾸지 않음)
+    - public List<Book> rentBook(Member mem, int...bookNoes) : 멤버 정보와 빌리려는 도서의 번호들을 입력하면 소장 도서에 있는 책인지, 대출 가능 개수를 초과하지는 않았는지, 연령제한에 문제가 되지는 않는지를 확인함. 만약 하나라도 문제가 되면 null을 반환하고 문제가 없으면 해당 도서 번호를 ArrayList에 추가함. 빌리려는 모든 책에 대한 대출 가능 여부 확인이 끝나고 문제 없으면 대출하려는 책을 담은 ArrayList를 반환함(+대출가능 여부를 확인하는 프로세스를 추가해야 함)
+    - public boolean isAbleToBorrow(Member mem, int numOfBooks) : 멤버와 빌리려는 책의 개수를 매개값으로 받아 해당 회원이 대출중인 도서와 빌리려는 책의 개수의 합이 5권을 초과하는지 확인. 초과하면 true, 초과하지 않으면 false 반환.
+    - public boolean borrowBooks(Member mem, int...bookNoes) : 멤버와 빌리려는 책들의 번호를 매개값으로 받아 rentBook() 메서드로 대출가능 여부를 확인하여 대출 가능한 책 목록을 전달받은 후 null값이면(대출 불가능한 사유가 있으면) 대출 실패라는 의미의 false를 반환. 대출 가능한 책 목록에 책이 있으면 멤버의 대출 목록에 해당 도서들을 추가하고 true를 반환함.
+    - public int issueCoupon(int...bookNoes) : 책 번호 목록을 받아 쿠폰을 발큽해주는 책이 있으면 개수를 모두 세서 발급하려는 쿠폰 개수를 반환함.
+    - public boolean checkAccessAge(Member mem, int...bookNoes) : 멤버와 책 번호 목록을 받아서 만약 해당 책이 만화책일 경우 나이연령을
+    - public boolean returnBooks(Member mem, int...bookNoes)
 - view
   - LibraryMenu : 
 - run
