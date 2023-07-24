@@ -1,9 +1,10 @@
 # myex
-강의자료, 책 등에서의 실습예제 나만의 방식으로 해본 것들
+- 강의자료, 책 등에서의 실습예제 나만의 방식으로 해본 것들
 
 
 # GradeManagementSystem(학점관리시스템)
 - 책 <Do it! 자바 프로그래밍 입문>의 최종 프로젝트 실습
+- 개발 환경 : Eclipse
 - 데이터와 목표만 가지고 직접 설계 및 구현한 프로그램(책의 코드와 다름)
 - Student 클래스 : 학생에 관한 클래스
   - 필드: 이름, 학번, 전공, 평균 점수, 최종 학점, 수강 과목(해시맵)
@@ -56,6 +57,7 @@
 
 # ChatProgram(TCP 소켓 프로그래밍을 이용한 채팅 프로그램)
 - 책 <이것이 자바다>의 Chapter 19 Section 7의 채팅 프로그램 실습
+- 개발 환경 : Eclipse(+외부 라이브러리 : JSON)
 - 설계의 틀은 책에서 가져왔으나 만들면서 내 방식대로 변형시켜본 것
 - ChatServer 클래스 : 채팅프로그램의 유저(클라이언트)의 연결 요청을 승인하며 채팅방을 관리하는 클래스
   - 필드 : 서버 소켓, 스레드풀(SocketClient에서 사용), 유저(클라이언트)와 연결된 소켓을 관리하기 위한 동기화된 맵인 chatRoom(채팅방)
@@ -112,6 +114,7 @@
 
 # JS Validation API
 - 과제로 받았던 것을 좀 더 발전시켜서 Web API를 적용해본 것
+- 개발 환경 : VSCode
 - HTML : 아이디, 비밀번호, 비밀번호 확인, 이름 칸과 회원가입 버튼으로 이루어진 구조
 - CSS : 기능 구현 중심으로 하였기 때문에 스타일상의 특이사항은 없음. 다만 다른 블로그를 참고하여 :invalid를 추가하였는데 유효하지 않을 때 스타일이 바로 적용되는 것이 아니라 회원가입 버튼을 적어도 한번은 눌러야 스타일이 적용되도록 되어 있음.
 - JS
@@ -126,6 +129,7 @@
 
 # SimpleBulletinBoard
 - 과제로 받았던 것을 좀 더 발전시켜서 단순 구현이 아니라 진짜 간이 게시판으로 기능할 수 있도록 여러 기능을 추가해본 것
+- 개발 환경 : VSCode
 - HTML : 게시글 작성하는 부분, 작성한 글들이 표 형태의 목록으로 나오는 부분, 게시글 내용이 나오는 부분
     - 게시글 작성하는 부분
       - 폼이 있는 곳으로 제목, 작성자, 내용을 입력하고 파일을 첨부할 수 있는 형태로 되어있음.
@@ -164,12 +168,53 @@
 
 
 # CalculatorAboutFigure1
-- 
+- 과제로 설계도만 받은 것을 구현해본 것.
+- 개발 환경 : IntelliJ(+외부 라이브러리 : Lombok)
+- 원과 사각형의 길이 정보를 받아 둘레나 넓이 값을 계산해서 출력해줌.
+- 입력한 메뉴 번호에 따라 메서드를 호출하는 방식으로 리플렉션을 활용함.
+- model : Point(점 좌표에 대한 데이터 형식), Circle(원에 대한 데이터 형식), Rectangle(사각형에 대한 데이터 형식)
+  - Point : 점에 대한 x, y 좌표값을 가지고 있음(Getter, Setter, toString, equals, hashCode, 생성자 등은 Lombok으로 생성함)
+    - Circle : Point를 상속함. Circle은 원에 대한 데이터로 상속받은 것 이외에 반지름(radius) 데이터를 추가적으로 가지고 있음.(기타 필요한 것들은 위처럼 Lombok으로 생성함)
+    - Rectangle : Point를 상속함. Rectangle은 사각형에 대한 데이터로 상속받은 것 이외에 너비(width)와 높이(height) 데이터를 추가적으로 가지고 있음(기타 필요한 것들은 위처럼 Lombok으로 생성함)
+- controller : CircleController(원에 관한 연산), RectangleController(사각형에 관한 연산)
+  - CircleController : 원에 관해 연산할 수 있는 메서드가 정의된 클래스. Circle을 생성하고 데이터를 입력하여 그 데이터를 기반으로 원주와 넓이를 계산함.
+  - RectangleController : 사각형에 관해 연산할 수 있는 메서드가 정의된 클래스. Rectangle을 생성하고 데이터를 입력하여 그 데이터를 기반으로 둘레와 넓이를 계산함.
+- view : PointView(사용자에게 메뉴를 보여주고 메뉴번호 또는 도형 데이터를 입력받아 적절한 연산 수행 및 결과 출력)
+  - PointView : 필드로 사용자에게 입력을 받는 Scanner와 Circle, Rectangle 컨트롤러를 생성해두고 이를 사용. 메서드는 메뉴를 그리고 사용자의 입력값에 따라 결과를 출력하는 메서드와 반복되는 작업을 한번만 정의해두고 재사용하기 위해 분리한 메서드로 나뉘어짐
+    - 사용자의 입력값에 따라 메뉴/연산결과 출력
+      - 인자로 함수를 받아 리플렉션 방식으로 해당 메서드를 호출하는 메서드
+        - private <T extends Point> Void controlMenu(String func, Point figure) : 유연하게 콜백함수를 쓸수는 없을까 고민하다가 만들어본 리플렉션 방식의 함수 호출 메서드. 메인 메뉴와 세부 메뉴에서 모두 사용할 수 있도록 하였으며 매개값으로 넣어야하는 객체가 다르기 때문에 필요한 부분만 다운캐스팅하여 사용함.
+        - private void controlMenu(String func) : 메인메뉴는 도형이 필요없기 때문에 위의 함수를 오버로딩한 것. 도형 부분만 null 값으로 입력하고 매개값을 전달하여 위의 함수를 호출함.
+      - 메뉴 구성하고 입력값을 받음
+        - public void mainMenu() : 처음에 출력되는 메뉴. 메뉴 번호에 해당하는 값을 입력받아 해당 메뉴로 이동시킴. 메뉴를 호출할 때는 메뉴 번호와 메서드 이름으로 구성된 Map을 만들어 사용자의 입력값에 따라 해당하는 메서드 정보를 전달함.
+        - public void circleMenu() : 메인 메뉴에서 원에 해당하는 메뉴를 입력했을 때 호출되는 메뉴. 메뉴 번호에 해당하는 값을 입력받아 해당 메뉴로 이동시킴. 메뉴를 호출할 때는 도형의 구성요소(반지름)와 메뉴 번호를 전달함.
+        - pulbic void rectangleMenu() : 메인 메뉴에서 원에 해당하는 메뉴를 입력했을 때 호출되는 메뉴. 메뉴 번호에 해당하는 값을 입력받아 해당 메뉴로 이동시킴. 메뉴를 호출할 때는 도형의 구성요소(너비, 높이)와 메뉴 번호를 전달함.
+        - private void inputCircleCalcOutline(String msg, String menuNo) : 좌표와 반지름 값을 입력받은 후 메서드 호출. 이때 사용자가 원하는 연산 정보(메서드)와 도형 정보(좌표, 반지름 값)를 매개값으로 전달함.
+        - private void inputRectCalcOutline(String msg1, String msg2, String menuNo) : 좌표와 너비, 높이 값을 입력받은 후 메서드 호출. 이때 사용자가 원하는 연산 정보(메서드)와 도형 정보(좌표, 너비, 높이 값)를 매개값으로 전달함.
+      - 사용자가 원하는 연산을 수행하기 위해 컨트롤러에서 관련된 메서드 호출
+        - public void calcCircum(Circle c) : 컨트롤러(CircleController)의 원주를 계산하는 메서드 호출하여 도형 정보 출력
+        - public void calcCircleArea(Circle c) : 컨트롤러(CircleController)의 원의 넓이를 계산하는 메서드를 호출하여 도형 정보 출력
+        - public void calcPerimeter(Rectangle r) : 컨트롤러(RectangleController)의 사각형의 둘레를 계산하는 메서드를 호출하여 도형 정보 출력
+        - public void calcRectArea(Rectangle r) : 컨트롤러(RectangleController)의 사각형의 면적을 계산하는 메서드를 호출하여 도형 정보 출력
+      - public void exit() : 프로그램 종료
+    - 편의성을 위해 반복작업을 분리한 메서드
+      - private void showMenuOutline(String msg) : 메뉴의 틀을 만들어 콘솔창에 출력
+      - private String figureInfoMenu(String type) : 도형의 메뉴 틀을 만들어 문자열로 반환
+      - private Map<String, String> makeMenuMap(String...menu) : 메뉴 내용들을 매개값으로 받아 메뉴 번호와 메뉴 내용을 쌍으로 묶어 Map으로 만들어 반환
+- run : Run(프로그램 진입점)
+  - Run : PointView를 생성하고 mainMenu를 호출함. 프로그램 진입점 생성.
+- 설계도대로 하고 보니 점과 도형의 관계가 잘못되어 있고 점의 정보를 사용하지 않아 점 관련 데이터가 무의미해지는 한계를 발견하여 Version2(CalculatorAboutFigure2)를 다시 만들었음.
+- 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
 
 # CalculatorAboutFigure2
+- 과제로 설계도를 받은 것에 문제점을 개선하여 다시 만든 것.
+- 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
 - 
+- 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
 
 # SimpleLibrary
+- 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
 - 
+- 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
