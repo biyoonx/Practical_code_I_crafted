@@ -296,7 +296,7 @@
   - Book : 도서관에 소장중인 책에 대한 정보가 저장되는 형태를 정의한 클래스
     - 책 번호(자동생성됨), 책 제목, 저자, 출판사, 대출가능여부(생성시 기본값 true)로 구성됨.
     - 기타 필요한 생성자, Getter, Setter, toString 등은 Lombok으로 정의함
-  - AniBook : Book을 
+  - AniBook : Book을 ㄴㄴ
   - CookBook : 
 - controller
   - LibraryController : 
