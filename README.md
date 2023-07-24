@@ -290,7 +290,14 @@
 - 과제로 받은 것에서 기능을 좀더 개선하거나 추가하여 만들어본 것
 - 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
 - model
+  - Member : 
+  - Book : 
+  - AniBook : 
+  - CookBook : 
 - controller
+  - LibraryController : 
 - view
+  - LibraryMenu : 
 - run
+  - Run : 
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
