@@ -290,9 +290,13 @@
 - 과제로 받은 것에서 기능을 좀더 개선하거나 추가하여 만들어본 것
 - 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
 - model
-  - Member : 
-  - Book : 
-  - AniBook : 
+  - Member : 도서관 프로그램 사용자의 정보가 담기는 형태를 정의한 클래스
+    - 멤버 번호(자동생성됨), 이름, 연령, 성별, 쿠폰개수, 빌린 책 목록이 정의되어 있음.
+    - 기타 필요한 생성자, Getter, Setter, toString 등은 Lombok으로 정의함
+  - Book : 도서관에 소장중인 책에 대한 정보가 저장되는 형태를 정의한 클래스
+    - 책 번호(자동생성됨), 책 제목, 저자, 출판사, 대출가능여부(생성시 기본값 true)로 구성됨.
+    - 기타 필요한 생성자, Getter, Setter, toString 등은 Lombok으로 정의함
+  - AniBook : Book을 
   - CookBook : 
 - controller
   - LibraryController : 
