@@ -208,9 +208,47 @@
 
 
 # CalculatorAboutFigure2
-- 과제로 설계도를 받은 것에 문제점을 개선하여 다시 만든 것.
+- 과제로 설계도를 받은 것에 아래와 같은 문제점을 개선하여 다시 만든 것.
+  - Version1은 원과 사각형이 도형이 아니라 원을 상속하고 있었음. 그러나 점은 각 도형들의 구성 요소(멤버변수)에 가깝지 상위 클래스라고 보기에는 부적절함.
+  - 점을 클래스로도 만들고 입력값도 받으나 사실상 형식적이었음. 이를 활용해서 연산하는 것은 없었을 뿐더러 원이나 사각형과 관련된 연산을 하기 위해서는 점 좌표가 두쌍 이상은 필요하지만 사용자에게 입력받는 값은 한쌍 뿐임.
 - 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
-- 
+- model
+  - Point : 좌표 x와 y로 구성된 점에 대한 클래스(Getter, Setter, toString, equals, hashCode, 생성자 등은 Lombok으로 생성함)
+  - Figure : 도형을 구성하는 두 개의 점과 면적, 둘레를 멤버변수로 가진 도형에 관한 추상 클래스.
+    - 생성자는 기본 생성자 이외에 Point 타입 변수 두 개를 매개값으로 받아 멤버변수를 초기화하는 생성자가 있음.
+    - protected abstract void checkPoint(Point p1, Point p2) : Point 타입 변수가 도형을 구성하기에 적합한지 확인하는 추상 메서드
+    - public void setPoint1(Point p1) : 멤버 변수 point2 값이 있다면 매개값으로 받은 p1이 도형을 그리기에 적절한지 체크하고 유효하면 멤버변수 point1에 값을 할당함(point2 값이 없으면 그냥 p1 값을 할당함)
+    - public void setPoint2(Point p2) : 멤버 변수 point1 값이 있다면 매개값으로 받은 p2이 도형을 그리기에 적절한지 체크하고 유효하면 멤버변수 point2에 값을 할당함(point1 값이 없으면 그냥 p1 값을 할당함)
+    - protected void checkLength(double length) : 길이가 유효한 값인지 확인하여 0 이하일 경우 예외 발생
+    - public String toString() : Point 타입의 값들 뿐만 아니라 면적과 둘레도 출력할 수 있도록 재구성함
+    - 이외의 Getter, Setter, equals 등은 Lombok으로 생성
+    - Circle : Figure 클래스를 상속하는 원에 관한 클래스.
+      - Circle 클래스 독자적으로 반지름에 해당하는 radius라는 멤버 변수를 가지고 있음
+      - 생성자는 기본 생성자 이외에 Point 타입 변수 두 개를 받아 멤버 변수를 초기화하는 생성자와, 반지름만 받아 내부 반지름 값만 초기화하는 생성자가 있음
+      - protected void checkPoint(Point p1, Point p2) : 오버라이딩한 메서드. Point 타입의 변수 두개를 매개값으로 받아 두 좌표가 동일한 위치에 있으면 예외를 발생시킴.
+      - public void setRadius(Point p1, Point p2) : Point 타입 변수 두개를 매개값으로 받아 두 점이 유효한지 확인(checkPoint()). 그 후 각 점을 초기화하고 두 점의 좌표로 반지름을 구하여 radius 값도 초기화함
+      - public void setRadius(double radius) : 반지름 값을 받아 길이가 유효한지 확인(checkLength())한 후 radius 값을 초기화함.
+      - public String toString() : 오버라이딩한 메서드. 상위 클래스의 변수값들과 더불어 반지름과 도형 타입도 출력되도록 함.
+      - 이외의 Getter, Setter, equals 등은 Lombok으로 생성
+    - Rectangle : Figure 클래스를 상속하는 사각형에 관한 클래스
+      - Rectangle 클래스 독자적으로 너비와 높이에 해당하는 width, height 멤버 변수를 가지고 있음
+      - 생성자는 기본 생성자 이외에 Point 타입 변수 두 개를 받아 멤버 변수를 초기화하는 생성자와, 너비와 높이 값만 받아 필드 width, height만 초기화하는 생성자가 있음
+      - protected void checkPoint(Point p1, Point p2) : 오버라이딩한 메서드. 두 점의 좌표 중 하나라도 동일하여 사각형을 그릴 수 없으면 예외 발생.
+      - public void setWidth(double width) : 너비 값을 받아 길이가 유효한지 확인(checkLength())한 후 내부 필드 초기화.
+      - public void setWidth(Point p1, Point p2) : Point 타입 두 점을 받아 도형을 그리기에 유효한 점인지 확인(checkPoint())한 후 유효하면 너비 값을 구하여 저장함.
+      - public void setHeight(double height) : 높이 값을 받아 길이가 유효한지 확인(checkLength())한 후 내부 필드 초기화.
+      - public void setHeight(Point p1, Point p2) : Point 타입 두 점을 받아 도형을 그리기에 유효한 점인지 확인(checkPoint())한 후 유효하면 높이 값을 구하여 저장함.
+      - public String toString() : 오버라이딩한 메서드. 상위 클래스의 변수값들과 더불어 너비와 높이, 도형 타입도 출력되도록 함.
+      - 이외의 Getter, Setter, equals 등은 Lombok으로 생성
+- controller
+  - FigureController : 도형을 컨트롤하기 위한 컨트롤러 역할을 하는 추상 클래스.
+    - 
+    - CircleController : FigureController를 상속하는 원을 컨트롤하기 위한 컨트롤러 역할을 하는 클래스.
+    - RectangleController : FigureController를 상속하는 사각형을 컨트롤하기 위한 컨트롤러 역할을 하는 클래스.
+- view
+  - FigureMenu
+- run : Run(프로그램 진입점)
+  - Run : FigureMenu를 생성하고 mainMenu를 호출함. 프로그램 진입점 생성.
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
 
