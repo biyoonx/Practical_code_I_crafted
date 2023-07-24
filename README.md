@@ -258,7 +258,29 @@
       - Rectangle 타입의 변수에만 있는 메서드를 사용하기 위해 필요한 부분마다 downCasting() 호출하여 다운캐스팅하여 사용
       - 상위 클래스에서 정의할 수 없는 사각형만 가지고 있는 너비와 높이에 대한 부분을 정의하고 연산하기 위한 부분만 메서드를 오버라이딩함.
 - view
-  - FigureMenu : 
+  - FigureMenu : 메뉴를 출력하고 사용자에게 입력을 받아 해당하는 결과가 출력되도록 구성된 클래스
+    - 필드는 사용자에게 계속 입력을 받을 Scanner 타입의 변수와 도형과 관련된 정보를 좀 더 쉽게 컨트롤하기 위해 내부 클래스를 선언하고 원과 사각형에 해당하는 변수를 선언, 또한 이를 담을 Map 타입 변수 선언. 콘솔창에서 사용자에게 입력받은 값들을 저장할 Map도 선언해둠.
+    - 초기화 블록에 원과 사각형에 대한 값들을 초기화해두고 이를 다시 Map에 유사배열 형태로 초기화함. 도형 관련하여 입력받을 값들을 저장할 Map도 생성해둠.
+    - 사용자에게 입력받은 값을 정수/실수 형태로 변환
+      - private int inputCastInt() : int형으로 변환해서 반환
+      - private double inputCaseDouble() : double형으로 변환해서 반환
+    - 매개값에 따라서 메뉴 내용을 구성해서 문자열 형태로 반환
+      - private String makeMainMenuContent(String type, String cont) : 도형 타입(원/사각형)과 메뉴 내용을 매개값으로 받아 메뉴 틀을 만들어서 문자열 형태로 반환
+      - private String makeFigureMenuContent(String type) : 도형 타입(원/사각형)을 매개값으로 받아 도형 메뉴 틀을 만들어서 문자열 형태로 반환
+    - 사용자에게 도형과 관련된 값을 요청하고 받아오는 메서드
+      - private double inputNumber(String val) : 매개값으로 사용자에게 받으려는 값이 무엇인지를 문자열 형태로 받아 콘솔창에 출력하고 입력값을 받아옴. 받은 값은 double형으로 변환하여 반환함.
+    - 메뉴를 출력하고 사용자가 원하는 메뉴 번호를 입력받아 해당하는 메뉴/입력창으로 이동해줌
+      - public void mainMenu() : 처음 출력되는 기본메뉴. 메뉴를 출력하고 값을 입력받아 원하는 메뉴로 매핑시켜줌. 사용자가 종료를 원하여 3을 입력할 경우 프로그램이 종료됨.
+      - private void figureMenu() : 도형과 관련된 세부 메뉴. 연산을 원하는 값을 선택하면 그에 따라 해당하는 메뉴로 매핑시켜줌. 사용자가 메인메뉴로 돌아가길 원하여 4를 입력할 경우 값들이 들어있는 Map을 비워주고 메인 메뉴로 이동시켜줌.
+      - private void figureInfoMenu(int figureType, String calcType) : 사용자에게 점 좌표를 기준으로 계산할지, 도형의 길이를 기준으로 계산할지를 물어보는 메뉴를  출력하고 입력값에 따라 해당하는 연산이 수행되도록 함. 점 기준으로 계산하는 1을 누르면 점을 두개 만들고 점 기준 연산을 수행함. 길이를 기준으로 계산하는 2를 누르면 길이 값들을 받아 길이를 기준으로 연산을 수행함.
+      - private void callCalc(int figureType, String calcType, String inputType) : 도형 정보와, 계산 기준과 어떤 결과를 출력하길 원하는지를 매개값으로 받아 해당하는 연산을 수행한 후 결과를 출력하도록 함. 연산이 끝나고 결과가 출력된 후에는 값들이 저장된 Map을 비우고 메인 메뉴로 이동함.
+    - 연산을 수행하는 메서드
+      - private FigureController calcByPoints(int figureType) : 점 좌표를 기준으로 연산을 수행하는 메서드. 매개값으로 받은 도형의 종류에 따라 연산을 수행한 후 해당하는 컨트롤러를 반환함.
+      - private FigureController calcByLength(int figureType) : 길이 값을 기준으로 연산을 수행하는 메서드. 매개값으로 받은 도형의 종류에 따라 연산을 수행한 후 해당하는 컨트롤러를 반환함.
+    - 사용자의 입력값에 따라 해당하는 점, 도형, 컨트롤러 매핑하여 생성
+      - private void makePoint(int no) : 점(Point) 두개를 생성(매개값으로 받는 숫자는 몇 번째 점인지 표시해주기 위한 것)
+      - private FigureController makeController(int figureType) : 입력받은 도형 종류(1-원, 2-사각형)에 따라 해당하는 컨트롤러를 생성하여 반환함.
+      - private Figure makeFigure(int figureType) : 입력받은 도형의 종류(1-원, 2-사각형)에 따라 관련된 도형의 정보를 초기화하고 해당하는 컨트롤러를 생성하여 반환함.
 - run : Run(프로그램 진입점)
   - Run : FigureMenu를 생성하고 mainMenu를 호출함. 프로그램 진입점 생성.
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
