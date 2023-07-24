@@ -242,17 +242,33 @@
       - 이외의 Getter, Setter, equals 등은 Lombok으로 생성
 - controller
   - FigureController : 도형을 컨트롤하기 위한 컨트롤러 역할을 하는 추상 클래스.
-    - 
+    - 필드로 Figure 타입의 상속 가능한 변수를 선언함
+      - Getter는 Lombok으로 생성
+      - Setter는 Figure 타입 매개변수를 받아 다운캐스팅(downCasting())하여 필드에 대입함. 또는 Point 타입 두 변수를 받아서 필드의 Point 타입 변수를 초기화함.
+    - protected abstract Figure downCasting(Figure figure) : Figure 타입 매개값을 받아 다운캐스팅하기 위한 메서드. 하위 클래스에서 필요한 타입으로 다운캐스팅하기 위해 추상 메서드로 선언.
+    - public String toString() : 오버라이딩한 메서드. 해당 클래스를 상속하는 하위 클래스에서 다운캐스팅한 형태로 출력되는 값을 정의함.
+    - 면적을 계산하는 calcArea()와 둘레를 계산하는 calcPeri()는 추상 메서드로 선언하고 Point를 받아 계산할수도 있도록 하기 위해 같은 메서드를 오버로딩함.
+    - 둘레와 면적을 모두 계산하는 메서드도 오버로딩하여 여러 개 생성함. 필요에 따라 내부 값을 초기화한 후 연산을 수행.
     - CircleController : FigureController를 상속하는 원을 컨트롤하기 위한 컨트롤러 역할을 하는 클래스.
+      - 매개변수를 받지 않는 생성자에 figure 타입 필드를 Circle 타입으로 생성하여 초기화함
+      - Circle 타입의 변수에만 있는 메서드를 사용하기 위해 필요한 부분마다 downCasting() 호출하여 다운캐스팅하여 사용
+      - 상위 클래스에서 정의할 수 없는 원만 가지고 있는 반지름에 대한 부분을 정의하고 연산하기 위한 부분만 메서드를 오버라이딩함.
     - RectangleController : FigureController를 상속하는 사각형을 컨트롤하기 위한 컨트롤러 역할을 하는 클래스.
+      - 매개변수를 받지 않는 생성자에 figure 타입 필드를 Rectangle 타입으로 생성하여 초기화함
+      - Rectangle 타입의 변수에만 있는 메서드를 사용하기 위해 필요한 부분마다 downCasting() 호출하여 다운캐스팅하여 사용
+      - 상위 클래스에서 정의할 수 없는 사각형만 가지고 있는 너비와 높이에 대한 부분을 정의하고 연산하기 위한 부분만 메서드를 오버라이딩함.
 - view
-  - FigureMenu
+  - FigureMenu : 
 - run : Run(프로그램 진입점)
   - Run : FigureMenu를 생성하고 mainMenu를 호출함. 프로그램 진입점 생성.
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
 
 # SimpleLibrary
+- 과제로 받은 것에서 기능을 좀더 개선하거나 추가하여 만들어본 것
 - 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
-- 
+- model
+- controller
+- view
+- run
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
