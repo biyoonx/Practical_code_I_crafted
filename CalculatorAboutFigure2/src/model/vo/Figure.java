@@ -31,7 +31,7 @@ public abstract class Figure {
 		this.point2 = p2;
 	}
 	protected void checkLength(double length) {
-		if (length < 0) {
+		if (length <= 0) {
 			throw new IllegalArgumentException("길이는 0보다 커야 합니다.");
 		}
 	}
