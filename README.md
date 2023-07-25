@@ -1,5 +1,15 @@
 # myex
 - 강의자료, 책 등에서의 실습예제 나만의 방식으로 해본 것들
+- 목차
+  - GradeManagementSystem(학점관리시스템)
+  - ChatProgram(TCP 소켓 프로그래밍을 이용한 채팅 프로그램)
+  - JS Validation API(회원가입 창을 구현하여 입력 내용에 대한 유효성 검사를 하는 프로그램)
+  - SimpleBulletinBoard(간이게시판)
+  - CalculatorAboutFigure1(도형에 관한 계산기.ver1)
+  - CalculatorAboutFigure2(도형에 관한 계산기.ver2)
+  - SimpleLibrary(간이도서관 프로그램)
+  - PhoneInformation(폰 스펙 출력 프로그램)
+  - AnimalPlace(동물 정보 출력 프로그램)
 
 
 # GradeManagementSystem(학점관리시스템)
@@ -112,7 +122,7 @@
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223122712567)
 
 
-# JS Validation API
+# JS Validation API(회원가입 창을 구현하여 입력 내용에 대한 유효성 검사를 하는 프로그램)
 - 과제로 받았던 것을 좀 더 발전시켜서 Web API를 적용해본 것
 - 개발 환경 : VSCode
 - HTML : 아이디, 비밀번호, 비밀번호 확인, 이름 칸과 회원가입 버튼으로 이루어진 구조
@@ -127,7 +137,7 @@
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223140316672)
 
 
-# SimpleBulletinBoard
+# SimpleBulletinBoard(간이게시판)
 - 과제로 받았던 것을 좀 더 발전시켜서 단순 구현이 아니라 진짜 간이 게시판으로 기능할 수 있도록 여러 기능을 추가해본 것
 - 개발 환경 : VSCode
 - HTML : 게시글 작성하는 부분, 작성한 글들이 표 형태의 목록으로 나오는 부분, 게시글 내용이 나오는 부분
@@ -167,7 +177,7 @@
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223139630336)
 
 
-# CalculatorAboutFigure1
+# CalculatorAboutFigure1(도형에 관한 계산기.ver1)
 - 과제로 설계도만 받은 것을 구현해본 것.
 - 개발 환경 : IntelliJ(+외부 라이브러리 : Lombok)
 - 원과 사각형의 길이 정보를 받아 둘레나 넓이 값을 계산해서 출력해줌.
@@ -207,7 +217,7 @@
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
 
-# CalculatorAboutFigure2
+# CalculatorAboutFigure2(도형에 관한 계산기.ver2)
 - 과제로 설계도를 받은 것에 아래와 같은 문제점을 개선하여 다시 만든 것.
   - Version1은 원과 사각형이 도형이 아니라 원을 상속하고 있었음. 그러나 점은 각 도형들의 구성 요소(멤버변수)에 가깝지 상위 클래스라고 보기에는 부적절함.
   - 점을 클래스로도 만들고 입력값도 받으나 사실상 형식적이었음. 이를 활용해서 연산하는 것은 없었을 뿐더러 원이나 사각형과 관련된 연산을 하기 위해서는 점 좌표가 두쌍 이상은 필요하지만 사용자에게 입력받는 값은 한쌍 뿐임.
@@ -286,7 +296,7 @@
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
 
-# SimpleLibrary
+# SimpleLibrary(간이도서관 프로그램)
 - 과제로 받은 것에서 기능을 좀더 개선하거나 추가하여 만들어본 것
 - 사용자가 가입하고 로그인하여 도서를 대출하고 반납하는 시스템
 - 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
@@ -347,7 +357,7 @@
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
 
-# PhoneInformation
+# PhoneInformation(폰 스펙 출력 프로그램)
 - 과제로 받은 것에서 기능을 약간 개선하여 만들어본 것
 - 아주 단순한 프로그램으로 원하는 핸드폰의 정보를 출력하게 하는 것
 - 메뉴를 만들고 네트워크로 연결해서 다른 핸드폰과 통화와 비슷하게 통신할 수 있도록 개선할 수 있을 듯 함.
@@ -374,7 +384,7 @@
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
 
-# AnimalPlace
+# AnimalPlace(동물 정보 출력 프로그램)
 - 과제로 받은 것에서 기능을 약간 개선하여 만들어본 것
 - 동물카페라고 가정하고 등록된 동물 정보를 랜덤 또는 모두 호출하는 프로그램.
 - 검색 기능을 넣어서 특정 동물이 어디있는지, 또는 어디에 어떤 동물들이 있는지를 출력해주는 기능을 넣어도 좋을 듯함.
