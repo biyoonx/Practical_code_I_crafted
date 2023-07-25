@@ -305,6 +305,9 @@
     - toString()에서 타입(CookBook)과 쿠폰발급유무에 대한 정보가 추가로 출력됨.
     - 기타 필요한 생성자, Getter, Setter, toString 등은 Lombok으로 정의함
 - controller
+
+-----여기서부터 정리
+
   - LibraryController : 도서관 시스템의 기능에 관해 컨트롤하는 클래스
     - 도서관 회원을 담은 Map과 소장도서를 담은 Map을 필드로 가지고 있음
     - public void insertMember(Member mem) : 회원이 가입했을 때 멤버 목록에 추가하기 위한 메서드. 매개값으로 Member타입 변수를 받아 회원 Map에 멤버를 추가함. 가입된 회원이 없을 때는 일단 Map을 먼저 생성하고 추가함.
@@ -312,9 +315,9 @@
     - public void insertBook(Book book) : 소장 도서를 추가하기 위한 메서드. Book 타입의 변수를 매개값으로 받아 소장도서 Map에 도서를 추가함. 만약 소장도서가 없으면 먼저 Map을 생성한 후에 추가함.
     - public Map<Integer, Book> selectAll() : 소장도서 전체를 Map 타입으로 반환하는 메서드.
     - public Map<Integer, Book> searchBook(String keyword) : 검색하려는 키워드를 매개값으로 받아 소장도서에 키워드가 있는지 검색하는 메서드. 책 제목이나 저자나 출판사에 키워드가 있으면 값을 Map에 담아 반환함(List 형태로 반환해도 괜찮을 것 같음. stream을 사용해서 Map으로 만드는 방식을 저장해두려고 바꾸지 않음)
-    - public List<Book> rentBook(Member mem, int...bookNoes) : 멤버 정보와 빌리려는 도서의 번호들을 입력하면 소장 도서에 있는 책인지, 대출 가능 개수를 초과하지는 않았는지, 연령제한에 문제가 되지는 않는지를 확인함. 만약 하나라도 문제가 되면 null을 반환하고 문제가 없으면 해당 도서 번호를 ArrayList에 추가함. 빌리려는 모든 책에 대한 대출 가능 여부 확인이 끝나고 문제 없으면 대출하려는 책을 담은 ArrayList를 반환함(+대출가능 여부를 확인하는 프로세스를 추가해야 함)
+    - public List<Book> rentBook(Member mem, int...bookNoes) : 멤버 정보와 빌리려는 도서의 번호들을 입력하면 소장 도서에 있는 책인지, 대출 가능한 상태인지, 연령제한에 문제가 되지는 않는지를 확인함. 만약 하나라도 문제가 되면 null을 반환하고 문제가 없으면 해당 도서 번호를 ArrayList에 추가함. 빌리려는 모든 책에 대한 대출 가능 여부 확인이 끝나고 문제 없으면 대출하려는 책을 담은 ArrayList를 반환함
     - public boolean isAbleToBorrow(Member mem, int numOfBooks) : 멤버와 빌리려는 책의 개수를 매개값으로 받아 해당 회원이 대출중인 도서와 빌리려는 책의 개수의 합이 5권을 초과하는지 확인. 초과하면 true, 초과하지 않으면 false 반환.
-    - public boolean borrowBooks(Member mem, int...bookNoes) : 멤버와 빌리려는 책들의 번호를 매개값으로 받아 rentBook() 메서드로 대출가능 여부를 확인하여 대출 가능한 책 목록을 전달받은 후 null값이면(대출 불가능한 사유가 있으면) 대출 실패라는 의미의 false를 반환. 대출 가능한 책 목록에 책이 있으면 멤버의 대출 목록에 해당 도서들을 추가하고 true를 반환함.(+쿠폰 발급 여부와 개수를 확인해서 로그인 중인 멤버의 쿠폰 개수를 증가시켜주는 작업도 추가해야 함)
+    - public boolean borrowBooks(Member mem, int...bookNoes) : 멤버와 빌리려는 책들의 번호를 매개값으로 받아 rentBook() 메서드로 대출가능 여부를 확인하여 대출 가능한 책 목록을 전달받은 후 null값이면(대출 불가능한 사유가 있으면) 대출 실패라는 의미의 false를 반환. 대출 가능한 책 목록에 책이 있으면 멤버의 대출 목록에 해당 도서들을 추가하고 쿠폰 발급 여부와 개수를 확인해서 로그인 중인 멤버의 쿠폰 개수를 증가시켜준 후 true를 반환함.
     - public int issueCoupon(int...bookNoes) : 책 번호 목록을 받아 쿠폰을 발큽해주는 책이 있으면 개수를 모두 세서 발급하려는 쿠폰 개수를 반환함.
     - public boolean checkAccessAge(Member mem, int...bookNoes) : 멤버와 책 번호 목록을 받아서 만약 해당 책이 만화책일 경우 연령제한이 있는지, 있으면 멤버가 볼 수 있는 연령인지 확인. 대출 가능하면 true, 아니면 false 반환.
     - public boolean returnBooks(Member mem, int...bookNoes) : 멤버와 반납하려는 책 번호들을 받아서 대여한 책 목록에 있는지 확인. 없는 번호면 반납에 실패했다는 의미의 false 반환. 있으면 해당 책의 대출 가능 여부를 true로 바꿔주고 멤버의 대출 도서 목록에서 해당 책을 제거한 후 반납에 성공했다는 의미의 true 반환.
@@ -339,4 +342,16 @@
   - private void exit() : 프로세스를 종료하는 메서드
 - run : Run(프로그램 실행 진입점)
   - Run : LibraryMenu를 생성. 도서 목록을 추가한 후 메뉴 실행시킴(시작점은 로그인 또는 회원가입 메뉴)(+)도서 목록을 추가하는 작업은 관리자 계정을 만들어 해당 계정에만 도서 목록 추가 등의 작업을 할수 있게 만들면 될듯)
+- 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
+
+
+# PhoneInformation
+- 과제로 받은 것에서 기능을 약간 개선하여 만들어본 것
+- 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
+- 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
+
+
+# AnimalPlace
+- 과제로 받은 것에서 기능을 약간 개선하여 만들어본 것
+- 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
