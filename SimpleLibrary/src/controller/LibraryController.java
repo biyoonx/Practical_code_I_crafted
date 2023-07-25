@@ -50,13 +50,13 @@ public class LibraryController {
 				return null;
 			}
 			Book book = allBList.get(no);
-			if (!(book.isAbleToBorrowed())) {
+			if (!(book.isAbleToBorrow())) {
 				return null;
 			}
 			if (!(checkAccessAge(mem, bookNoes))) {
 				return null;
 			}
-			book.setAbleToBorrowed(false);
+			book.setAbleToBorrow(false);
 			rentBList.add(book);
 		}
 		return rentBList;
@@ -78,6 +78,7 @@ public class LibraryController {
 			return false;
 		}
 		mem.getBorrowedBList().addAll(books);
+		mem.setCouponCount(mem.getCouponCount() + issueCoupon(bookNoes));
 		return true;
 	}
 	public int issueCoupon(int...bookNoes) {
@@ -107,7 +108,7 @@ public class LibraryController {
 				if (mem.getBorrowedBList().stream().noneMatch(b -> b.getBookNo() == no)) {
 					return false;
 				}
-				allBList.get(no).setAbleToBorrowed(true);
+				allBList.get(no).setAbleToBorrow(true);
 				Book book = mem.getBorrowedBList().stream().filter(b -> b.getBookNo() == no).findFirst().get();
 				mem.getBorrowedBList().remove(book);
 			}

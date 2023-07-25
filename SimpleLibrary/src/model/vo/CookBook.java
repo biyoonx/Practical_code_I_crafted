@@ -15,6 +15,6 @@ public class CookBook extends Book {
 	
 	@Override
 	public String toString() {
-		return super.toString() + ", type=CookBook, couponForAcademy=" + this.isAbleToBorrowed();
+		return super.toString() + ", type=CookBook, couponForAcademy=" + this.isCouponForAcademy();
 	}
 }
