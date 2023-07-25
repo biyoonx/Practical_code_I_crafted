@@ -364,23 +364,35 @@
 - 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
 - model
   - Interface
-    - Phone
-    - CellPhone
-    - Camera
-    - TouchDisplay
-    - NotePen
+    - Phone : 누를 수 있는 번호가 필드(상수)로 저장되어 있고 통화를 거는 것과 받는 것을 의미하는 디폴트 메서드가 정의되어 있음.
+    - Camera : 사진을 찍는 것을 의미하는 추상 메서드가 정의되어 있음.
+    - CellPhone : Phone과 Camera 인터페이스를 상속함. 핸드폰을 충전하는 것을 의미하는 추상 메서드가 선언되어 있음.
+    - TouchDisplay : 디바이스 터치에 대한 추상 메서드가 선언되어 있음.
+    - NotePen : 펜 버튼 여부가 필드(상수)로 선언되어 있고 블루투스펜 지원여부를 확인할 수 있는 추상메서드가 선언되어 있음.
   - Class
     - abstract
-      - SmartPhone
+      - SmartPhone : CellPhone과 TouchDisplay 클래스를 상속하는 추상 클래스.
+        - 스마트폰의 기종과 제조사가 필드로 선언되어 있음.
+        - public String printInformation(boolean bluetoothPen) : 스마트폰의 제원을 문자열 형태로 반환
+        - 기타 기본 생성자와 Getter, Setter는 Lombok으로 생성함.
     - concrete
-      - GalaxyNote9
-      - V40
+      - GalaxyNote9 : SmartPhone을 상속하고, NotePen을 구현하는 기종 갤럭시 노트9에 대한 클래스.
+        - 인자를 받지 않는 생성자로 객체를 생성했을 때 제조사와 기종을 초기화해줌
+        - charge(), picture(), touch(), bluetoothPen()을 오버라이딩하여 해당하는 값을 반환하도록 함.
+      - V40 : SmartPhone을 상속하고, NotePen을 구현하는 기종 V40에 대한 클래스.
+        - 인자를 받지 않는 생성자로 객체를 생성했을 때 제조사와 기종을 초기화해줌
+        - charge(), picture(), touch(), bluetoothPen()을 오버라이딩하여 해당하는 값을 반환하도록 함.
 - controller
-  - PhoneController
+  - PhoneController : 제조한 폰을 컨트롤하기 위한 컨트롤러.
+    - 컨트롤하고자 하는 폰 기종을 Map에 담아 초기화해둠. (키는 기종명)
+    - public List<String> method(String...phoneNames) : 출력할 핸드폰의 정보를 담을 리스트를 먼저 생성. 매개값으로 받은 문자열 배열을 순회하며 조회할 수 있는 폰이 맞는지, SmartPhone 및 NotePen을 상속하는 객체인지를 확인하여 맞다면 만들어둔 리스트에 해당 핸드폰의 정보를 추가. 이렇게 만들어진 문자열 리스트를 반환함.
 - view
-  - PhoneView
-- run
-  - Run
+  - PhoneView : 메뉴를 출력하기 위해 내용을 구성하고 적절한 메뉴로 매핑해주는 역할을 하는 클래스
+    - 핸드폰 관련 데이터를 컨트롤하기 위한 PhoneController, 사용자에게 입력을 받아올 Scanner, 메뉴 번호별 핸드폰 정보를 담을 Map을 필드로 생성
+    - public void mainMenu() : 메뉴를 띄우고 사용자가 콘솔창에 입력하는 값에 따라 해당 정보를 출력하고 다시 메인 메뉴로 돌아옴. 잘못 입력했을 경우에도 잘못 입력했다는 메시지를 출력하고 메인 메뉴를 띄움. 사용자가 종료 메뉴를 선택했을 때에만 종료시킴.
+    - private void exit() : 시스템 종료 메시지를 띄우고 프로그램을 종료함.
+- run : Run(프로그램 진입점)
+  - Run : PhoneView를 생성하고 메인 메뉴를 호출함.
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
 
@@ -390,11 +402,30 @@
 - 검색 기능을 넣어서 특정 동물이 어디있는지, 또는 어디에 어떤 동물들이 있는지를 출력해주는 기능을 넣어도 좋을 듯함.
 - 개발 환경 : Eclipse(+외부 라이브러리 : Lombok)
 - model
-  - Animal
-    - Cat
-    - Dog
+  - Animal : 동물에 관한 데이터 형식과 메서드를 정의한 추상 클래스.
+    - 필드로 이름과 종이 선언되어 있음.
+    - 기본 생성자와 인자를 받는 생성자로 구성됨
+    - 동물에 대한 정보를 말하는 추상 메서드가 선언되어 있음.
+    - 오버라이딩된 toString이 정의되어 있음.
+    - 기타 메서드는 Lombok으로 정의
+    - Cat : Animal 클래스를 상속하며 고양이에 대한 데이터 형식을 정의하는 클래스
+      - 위치와 색상이 필드로 정의되어 있음.
+      - 기본 생성자와 인자를 받는 생성자로 구성됨
+      - Cat만의 필드에 대한 정보까지 포함하여 toString()이 출력되도록 함.
+    - Dog : Animal 클래스를 상속하며 개에 대한 데이터 형식을 정의하는 클래스
+      - 위치와 몸무게가 필드로 정의되어 있음.
+      - 기본 생성자와 인자를 받는 생성자로 구성됨
+      - Dog만의 필드에 대한 정보까지 포함하여 toString()이 출력되도록 함.
 - view
-  - AnimalPlace
-- run
-  - Run
+  - AnimalPlace : 동물 카페라 가정하고 여러 회원 동물들을 저장해두고 있으며 그들에 대한 정보가 출력되도록 하는 클래스 구현
+  - 사용자에게 입력을 받는 Scanner 클래스와 회원 동물들을 저장해둘 Map을 필드로 선언함.
+  - 초기화 블록으로 동물들에 대한 정보를 Map에 저장
+  - public void mainMenu() : 메인 메뉴를 띄우고 원하는 메뉴 번호를 받아 해당하는 정보를 출력해주는 메서드.
+    - 1은 랜덤으로 동물 아무나를 출력해줌.
+    - 2는 모든 동물 정보를 출력해줌.
+    - 3은 프로그램을 종료해줌.
+    - 기타 값은 잘못 입력했다는 메세지를 출력하고 메인 메뉴를 다시 호출함.
+  - private void showAnimal() : 동물을 랜덤으로 호출하여 콘솔창에 출력하는 메서드
+- run : Run(프로그램 진입점)
+  - Run : AnimalPlace를 생성하고 메인 메뉴를 호출함
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
