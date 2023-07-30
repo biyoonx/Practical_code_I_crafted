@@ -66,7 +66,7 @@ public class LibraryMenu {
 			int memNo = Integer.parseInt(showNInput("회원번호"));
 			if (Optional.ofNullable(lc.memInfo(memNo)).isEmpty()) {
 				System.out.println("없는 회원번호입니다.");
-				signInMenu();
+				selectSignInUpMenu();
 			} else {
 				currUser = lc.memInfo(memNo);
 				System.out.println("로그인되었습니다.");
@@ -74,7 +74,7 @@ public class LibraryMenu {
 			}
 		} catch(Exception e) {
 			System.out.println("잘못 입력하셨습니다.");
-			signInMenu();
+			selectSignInUpMenu();
 		}
 	}
 	private void signUpMenu() {
@@ -91,7 +91,7 @@ public class LibraryMenu {
 			mainMenu();
 		} catch(Exception e) {
 			System.out.println("잘못 입력하셨습니다.");
-			signUpMenu();
+			selectSignInUpMenu();
 		}
 	}
 	private void mainMenu() {
