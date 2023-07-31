@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @NoArgsConstructor
 public class Dog extends Animal {
-	public static final String PLACE = "애견카페";
+	public static final String PLACE = "강아지유치원";
 	@Getter
 	@Setter
 	private int weight;
