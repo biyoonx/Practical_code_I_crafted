@@ -21,7 +21,7 @@ public class AnimalPlace {
 	}
 	
 	private void showAnimal() {
-		int randNum = (int)(Math.random() * 6 + 1);
+		int randNum = (int)(Math.random() * animals.size() + 1);
 		System.out.println();
 		animals.get(randNum).speak();
 		System.out.println();
