@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import controller.LibraryController;
-import lombok.Builder.Default;
 import model.vo.AniBook;
 import model.vo.Book;
 import model.vo.CookBook;

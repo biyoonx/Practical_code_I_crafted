@@ -17,18 +17,20 @@ public class LibraryController {
 	private Map<Integer, Book> allBList = null;
 	
 	public void insertMember(Member mem) {
-		if (Optional.ofNullable(memList).isEmpty()) {
-			memList = new HashMap<Integer, Member>();
-		}
+		memList = Optional.ofNullable(memList).orElseGet(() -> new HashMap<Integer, Member>());
+//		if (Optional.ofNullable(memList).isEmpty()) {
+//			memList = new HashMap<Integer, Member>();
+//		}
 		memList.put(mem.getMemNo(), mem);
 	}
 	public Member memInfo(int memNo) {
 		return memList.get(memNo);
 	}
 	public void insertBook(Book book) {
-		if (Optional.ofNullable(allBList).isEmpty()) {
-			allBList = new HashMap<Integer, Book>();
-		}
+		allBList = Optional.ofNullable(allBList).orElseGet(() -> new HashMap<Integer, Book>());
+//		if (Optional.ofNullable(allBList).isEmpty()) {
+//			allBList = new HashMap<Integer, Book>();
+//		}
 		allBList.put(book.getBookNo(), book);
 	}
 	
@@ -74,7 +76,8 @@ public class LibraryController {
 //			return false;
 //		}
 		List<Book> books = rentBook(mem, bookNoes);
-		if (Optional.ofNullable(books).isEmpty()) {
+		if (books == null) {
+//		if (Optional.ofNullable(books).isEmpty()) {
 			return false;
 		}
 		mem.getBorrowedBList().addAll(books);
