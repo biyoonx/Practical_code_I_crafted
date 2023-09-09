@@ -10,6 +10,7 @@
   - SimpleLibrary(간이도서관 프로그램)
   - PhoneInformation(폰 스펙 출력 프로그램)
   - AnimalPlace(동물 정보 출력 프로그램)
+  - QuizTable(퀴즈 맞추기 프로그램)
 
 
 # GradeManagementSystem(학점관리시스템)
@@ -430,3 +431,11 @@
   - Run : AnimalPlace를 생성하고 메인 메뉴를 호출함
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223162893588)
 
+# QuizTable(퀴즈 맞추기 프로그램)
+- 과제로 받은 것을 내 방식대로 풀어본 것
+- 퀴즈를 내고 각각의 퀴즈별로 입력칸에 입력값을 받아 제출하기를 누르면 각 퀴즈별로 옆에 결과를 띄움
+- 개발환경 : STS3로 프로젝트를 생성했으나 중간에 이동하게 되면서 IntelliJ로 완성시킴. 톰캣 v9.0.78, 스프링5, JSP, MyBatis, MySQL(v8.0.33 ← 오라클 11g에서 이동 후 변경)
+- 결과창
+
+- 
+- 
