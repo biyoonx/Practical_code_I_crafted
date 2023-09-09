@@ -435,7 +435,13 @@
 - 과제로 받은 것을 내 방식대로 풀어본 것
 - 퀴즈를 내고 각각의 퀴즈별로 입력칸에 입력값을 받아 제출하기를 누르면 각 퀴즈별로 옆에 결과를 띄움
 - 개발환경 : STS3로 프로젝트를 생성했으나 중간에 이동하게 되면서 IntelliJ로 완성시킴. 톰캣 v9.0.78, 스프링5, JSP, MyBatis, MySQL(v8.0.33 ← 오라클 11g에서 이동 후 변경)
+- 각 퀴즈 내용은 데이터베이스에 미리 테이블을 만들고 데이터를 넣어두었음
+- 추가로 제출한 내용들도 수집해서 몇개를 맞았는지, 제출한 사람들은 평균적으로 몇개를 맞았는지, 그 중의 몇 등인지의 정보를 출력하도록 하고 결과분석 버튼에 해당 페이지로 이동하도록 만들면 좋을 것 같음
 - 결과창
+  - 기본 화면(http://localhost:8090/quizExercise/)
+    - 각각 퀴즈의 답들을 입력할 수 있게 하였음. 폼 제출 전.
+![Quiz-Ta-da-(quizExercise)](https://github.com/biyoonx/myex/assets/135206920/0c6b2ad4-3765-4352-b0a4-4927f85b913b)
+  - 폼 제출 후 화면(http://localhost:8090/quizExercise/quizSubmitted/)
+    - 각각 퀴즈의 답들을 제출한 후의 화면으로 새로운 창으로 이동하지 않고 화면 내에서 각 퀴즈의 옆에 정답인지 오답인지 여부가 출력되도록 함
+![Quiz-Ta-da-(quizExercise quizSubmitted)](https://github.com/biyoonx/myex/assets/135206920/e0f35449-adfd-4f30-981f-e51916e19260)
 
-- 
-- 
