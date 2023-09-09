@@ -1,0 +1,39 @@
+.mainNav ul {
+  display: flex;
+  justify-content: center;
+}
+.mainNav li {
+  list-style-type: none;
+  margin: 2rem;
+}
+
+h1 {
+  text-align: center;
+  font-size: 35px;
+  font-weight: bolder;
+}
+
+table {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+th {
+  font-weight: 700;
+}
+td {
+  font-weight: 530;
+}
+th,
+td {
+  font-size: 18px;
+}
+
+.createNovelForm {
+  padding-left: 0;
+}
+.createNovelForm li {
+  list-style-type: none;
+  width: fit-content;
+  margin: auto;
+}
