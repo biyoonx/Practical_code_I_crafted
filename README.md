@@ -444,4 +444,4 @@
   - 폼 제출 후 화면(http://localhost:8090/quizExercise/quizSubmitted/)
     - 각각 퀴즈의 답들을 제출한 후의 화면으로 새로운 창으로 이동하지 않고 화면 내에서 각 퀴즈의 옆에 정답인지 오답인지 여부가 출력되도록 함
 ![Quiz-Ta-da-(quizExercise quizSubmitted)](https://github.com/biyoonx/myex/assets/135206920/e0f35449-adfd-4f30-981f-e51916e19260)
-
+- 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223206447127)
