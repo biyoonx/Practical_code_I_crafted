@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&display=swap');
+
+* {
+    font-family: 'Gaegu', cursive;
+}
+
+h1 {
+    text-align: center;
+    font-style: italic;
+    font-size: 60px;
+}
+
+th, td {
+	border: 1px dotted darkgray;
+    padding: 1rem;
+}
+
+table {
+    border: 1px solid black;
+}
+
+tr:first-of-type {
+    border-bottom: 1px solid black;
+}
+
+table, th, td, tr {
+    border-collapse: collapse;
+    font-size: 30px;
+}
+
+form, table, button {
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+	display: block;
+    font-size: 30px;
+}
+
+form input {
+    font-size: 30px;
+}
+
+button {
+    padding: 1rem;
+    margin: 1rem auto;
+    box-shadow: 1px 1px 1px darkgray;
+}
