@@ -11,6 +11,7 @@
   - PhoneInformation(폰 스펙 출력 프로그램)
   - AnimalPlace(동물 정보 출력 프로그램)
   - QuizTable(퀴즈 맞추기 프로그램)
+  - NovelList(소설 목록 띄우고 다른 페이지에서 추가하는 프로그램)
 
 
 # GradeManagementSystem(학점관리시스템)
@@ -445,3 +446,9 @@
     - 각각 퀴즈의 답들을 제출한 후의 화면으로 새로운 창으로 이동하지 않고 화면 내에서 각 퀴즈의 옆에 정답인지 오답인지 여부가 출력되도록 함
 ![Quiz-Ta-da-(quizExercise quizSubmitted)](https://github.com/biyoonx/myex/assets/135206920/e0f35449-adfd-4f30-981f-e51916e19260)
 - 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223206447127)
+
+# NovelList(소설 목록 띄우고 다른 페이지에서 추가하는 프로그램)
+- 과제로 받은 것을 데이터 방식이나 받아오는 것을 바꾸고 데이터를 페이지간에 주고받을 수 있도록 추가한 것
+- 페이지가 모두 공유하는 레이아웃이 있고 그 레이아웃에 NavBar가 있는 형태로 소설 목록이나 소설을 추가하는 페이지로 이동할 수 있음
+- 개발환경 : VSCODE(IntelliJ도 조금 사용), ReactJS, NodeJS
+- 기타 과정에 대한 것들 기록(https://blog.naver.com/biyoonx/223197967894)
