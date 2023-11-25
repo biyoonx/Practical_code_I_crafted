@@ -1,17 +1,17 @@
 # myex
 - 강의자료, 책 등에서의 실습예제 나만의 방식으로 해본 것들
 - 목차
-  - GradeManagementSystem(학점관리시스템) - 자바 실습
-  - ChatProgram(TCP 소켓 프로그래밍을 이용한 채팅 프로그램) - 자바 실습(네트워크, 스레드, 입출력 스트림)
-  - JS Validation API(회원가입 창을 구현하여 입력 내용에 대한 유효성 검사를 하는 프로그램) - 자바스크립트 및 브라우저 API 실습
-  - SimpleBulletinBoard(간이게시판) - 자바스크립트 실습
-  - CalculatorAboutFigure1(도형에 관한 계산기.ver1) - 자바 실습
-  - CalculatorAboutFigure2(도형에 관한 계산기.ver2) - 자바 실습
-  - SimpleLibrary(간이도서관 프로그램) - 자바 실습
-  - PhoneInformation(폰 스펙 출력 프로그램) - 자바 실습
-  - AnimalPlace(동물 정보 출력 프로그램) - 자바 실습
-  - QuizTable(퀴즈 맞추기 프로그램) - 자바, 스프링, JSP 실습
-  - NovelList(소설 목록 띄우고 다른 페이지에서 추가하는 프로그램) - 리액트 실습
+  - [GradeManagementSystem(학점관리시스템)](#grademanagementsystem학점관리시스템) - 자바 실습
+  - [ChatProgram(TCP 소켓 프로그래밍을 이용한 채팅 프로그램)](#chatprogramtcp-소켓-프로그래밍을-이용한-채팅-프로그램) - 자바 실습(네트워크, 스레드, 입출력 스트림)
+  - [JS Validation API(회원가입 창을 구현하여 입력 내용에 대한 유효성 검사를 하는 프로그램)](#js-validation-api회원가입-창을-구현하여-입력-내용에-대한-유효성-검사를-하는-프로그램) - 자바스크립트 및 브라우저 API 실습
+  - [SimpleBulletinBoard(간이게시판)](#simplebulletinboard간이게시판) - 자바스크립트 실습
+  - [CalculatorAboutFigure1(도형에 관한 계산기.ver1)](#calculatoraboutfigure1도형에-관한-계산기ver1) - 자바 실습
+  - [CalculatorAboutFigure2(도형에 관한 계산기.ver2)](#calculatoraboutfigure2도형에-관한-계산기ver2) - 자바 실습
+  - [SimpleLibrary(간이도서관 프로그램)](#simplelibrary간이도서관-프로그램) - 자바 실습
+  - [PhoneInformation(폰 스펙 출력 프로그램)](#phoneinformation폰-스펙-출력-프로그램) - 자바 실습
+  - [AnimalPlace(동물 정보 출력 프로그램)](#animalplace동물-정보-출력-프로그램) - 자바 실습
+  - [QuizTable(퀴즈 맞추기 프로그램)](#quiztable퀴즈-맞추기-프로그램) - 자바, 스프링, JSP 실습
+  - [NovelList(소설 목록 띄우고 다른 페이지에서 추가하는 프로그램)](#novellist소설-목록-띄우고-다른-페이지에서-추가하는-프로그램) - 리액트 실습
 
 
 # GradeManagementSystem(학점관리시스템)
